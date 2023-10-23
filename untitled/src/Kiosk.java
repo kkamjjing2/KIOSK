@@ -42,6 +42,8 @@ public class Kiosk {
 
         while (true) {
             System.out.println();
+            System.out.println("\"SHAKESHACK BURGER에 오신걸 환영합니다.\"");
+            System.out.println("아래 상품 메뉴판을 보고 상품을 골라 입력해주세요.\n");
             System.out.println("[ SHAKESHACK MENU ]");
             for (int i = 0; i < menus.length; i++) {
                 System.out.println((i + 1) + ". " + menus[i].name + "\t\t|" + menus[i].description);
@@ -56,15 +58,53 @@ public class Kiosk {
             int number = scanner.nextInt();
 
             switch (number) {
-                case 1 : // 버거 상품으로 이동 (products01)
-                case 2 : // 아이스크림 상품으로 이동 (products02)
-                case 3 : // 음료 상품으로 이동 (products05))
-                case 4 : // 맥주 상품으로 이동 (products04)
-                case 5 : // 주문 화면으로 이동
-                case 6 : // 취소 화면으로 이동
+                case 1 : productMenu(products01, order); // 버거 상품으로 이동 (products01)
+                case 2 : productMenu(products02, order); // 아이스크림 상품으로 이동 (products02)
+                case 3 : productMenu(products03, order); // 음료 상품으로 이동 (products05))
+                case 4 : productMenu(products04, order); // 맥주 상품으로 이동 (products04)
+                case 5 :  // 주문 화면으로 이동
+                case 6 :  // 취소 화면으로 이동
                 default:
-                    System.out.println("눈 똑바로 뜨고 선택하세요.");
+                    System.out.println("눈 똑바로 뜨고 선택하세요!!!!!!!!!!");
             }
         }
     }
+
+    public static void productMenu(Product[] products, Order order) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\"SHAKESHACK BURGER에 오신걸 환영합니다.\"");
+        System.out.println("아래 상품 메뉴판을 보고 상품을 골라 입력해주세요.\n");
+
+        while (true) {
+            System.out.println("[ Burgers MENU ]");
+            for (int i = 0; i < products.length; i++) {
+                System.out.println((i + 1) + ". " + products[i].name + "\t | W " + products[i].price + " | " + products[i].description);
+            }
+
+            System.out.println("\n 상품을 선택해주세요. (이전 화면 : 0)");
+            int number = scanner.nextInt();
+
+            if ( 0 < number && number <= products.length) { // 장바구니에 선택한 상품 추가
+                addToCartConfirmation(products[number-1], order);
+            } else {
+                System.out.println("눈 똑바로 뜨고 선택하세요!!!!!!!!!!");
+            }
+        }
+    }
+
+    private static void addToCartConfirmation(Product product, Order order) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\"" +product.name + "\t | W " + product.price + " | " + product.description + "\"\n");
+        System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+        System.out.println("1. 확인        2. 취소");
+
+        int number = scanner.nextInt();
+
+        if(number == 1) {
+            order.addToCart(product);
+            System.out.println(product.name + "(이)가 장바구니에 추가되었습니다!!!!!!\n");
+        }
+    }
+
+
 }

@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Kiosk {
@@ -43,7 +42,7 @@ public class Kiosk {
         while (true) {
             System.out.println();
             System.out.println("\"SHAKESHACK BURGER에 오신걸 환영합니다.\"");
-            System.out.println("아래 상품 메뉴판을 보고 상품을 골라 입력해주세요.\n");
+            System.out.println("아래 메뉴판을 보고 상품을 골라 입력해주세요.\n");
             System.out.println("[ SHAKESHACK MENU ]");
             for (int i = 0; i < menus.length; i++) {
                 System.out.println((i + 1) + ". " + menus[i].name + "\t\t|" + menus[i].description);
@@ -62,7 +61,7 @@ public class Kiosk {
                 case 2 : productMenu(products02, order); // 아이스크림 상품으로 이동 (products02)
                 case 3 : productMenu(products03, order); // 음료 상품으로 이동 (products05))
                 case 4 : productMenu(products04, order); // 맥주 상품으로 이동 (products04)
-                case 5 :  // 주문 화면으로 이동
+                case 5 : orderScreen(order); // 주문 화면으로 이동
                 case 6 :  // 취소 화면으로 이동
                 default:
                     System.out.println("눈 똑바로 뜨고 선택하세요!!!!!!!!!!");
@@ -72,11 +71,12 @@ public class Kiosk {
 
     public static void productMenu(Product[] products, Order order) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("--------------------------------------------------------------------------------------------");
         System.out.println("\"SHAKESHACK BURGER에 오신걸 환영합니다.\"");
-        System.out.println("아래 상품 메뉴판을 보고 상품을 골라 입력해주세요.\n");
+        System.out.println("아래 메뉴판을 보고 상품을 골라 입력해주세요.\n");
 
         while (true) {
-            System.out.println("[ Burgers MENU ]");
+            System.out.println("[ SHAKESHACK MENU ]");
             for (int i = 0; i < products.length; i++) {
                 System.out.println((i + 1) + ". " + products[i].name + "\t | W " + products[i].price + " | " + products[i].description);
             }
@@ -86,13 +86,17 @@ public class Kiosk {
 
             if ( 0 < number && number <= products.length) { // 장바구니에 선택한 상품 추가
                 addToCartConfirmation(products[number-1], order);
-            } else {
+            }
+            else if (number == 0) {
+                break;
+            }
+            else {
                 System.out.println("눈 똑바로 뜨고 선택하세요!!!!!!!!!!");
             }
         }
     }
 
-    private static void addToCartConfirmation(Product product, Order order) {
+    private static void addToCartConfirmation(Product product, Order order) { // 장바구니 추가 확인 후 추가 메서드
         Scanner scanner = new Scanner(System.in);
         System.out.println("\"" +product.name + "\t | W " + product.price + " | " + product.description + "\"\n");
         System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
@@ -106,5 +110,33 @@ public class Kiosk {
         }
     }
 
+    private static void orderScreen(Order order) { // 주문 화면 메서드
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("--------------------------------------------------------------------------------------------");
+        System.out.println("아래와 같이 주문하시겠습니까? \n [ Orders ]");
+        cartList(order);
+        order.calculateTotal();
 
+        int number = scanner.nextInt();
+
+        if (number == 1) { // 주문 완료 화면으로 이동
+            completeOrder(order);
+        } else if (number == 2) { // 메인 메뉴판으로 이동
+        } else {
+            System.out.println("눈 똑바로 뜨고 선택하세요!!!!!!!!!!");
+        }
+    }
+
+    private static void completeOrder (Order order) { // 주문 완료 화면 출력
+        System.out.println("주문이 완료되었습니다!");
+        System.out.println("대기 번호는 [ " + Math.random()*200+1 + " ] 번 입니다.");
+        System.out.println("(3초후 메뉴판으로 돌아갑니다.)");
+
+    }
+    private static void cartList (Order order) { // 장바구니 목록 출력
+        for (Product product : order.cart) {
+            System.out.println(product.name + " | W " + product.price + " | " + product.description);
+        }
+            System.out.println();
+    }
 }

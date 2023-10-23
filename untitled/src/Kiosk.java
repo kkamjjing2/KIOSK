@@ -62,12 +62,14 @@ public class Kiosk {
                 case 3 : productMenu(products03, order); // 음료 상품으로 이동 (products05))
                 case 4 : productMenu(products04, order); // 맥주 상품으로 이동 (products04)
                 case 5 : orderScreen(order); // 주문 화면으로 이동
-                case 6 :  // 취소 화면으로 이동
+                case 6 : cancelScreen(order);
                 default:
                     System.out.println("눈 똑바로 뜨고 선택하세요!!!!!!!!!!");
             }
         }
     }
+
+
 
     public static void productMenu(Product[] products, Order order) {
         Scanner scanner = new Scanner(System.in);
@@ -138,5 +140,9 @@ public class Kiosk {
             System.out.println(product.name + " | W " + product.price + " | " + product.description);
         }
             System.out.println();
+    }
+
+    private static void cancelScreen(Order order) {  // 주문 취소 화면 출력
+        order.clearCart();
     }
 }

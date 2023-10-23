@@ -54,6 +54,17 @@ public class Kiosk {
 
             System.out.print("화면에 보이는 숫자를 입력해주세요. : ");
             int number = scanner.nextInt();
+
+            switch (number) {
+                case 1 : // 버거 상품으로 이동 (products01)
+                case 2 : // 아이스크림 상품으로 이동 (products02)
+                case 3 : // 음료 상품으로 이동 (products05))
+                case 4 : // 맥주 상품으로 이동 (products04)
+                case 5 : // 주문 화면으로 이동
+                case 6 : // 취소 화면으로 이동
+                default:
+                    System.out.println("눈 똑바로 뜨고 선택하세요.");
+            }
         }
     }
 }

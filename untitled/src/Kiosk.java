@@ -11,7 +11,6 @@ public class Kiosk {
                 new Menu("Drinks", "매장에서 직접 만드는 음료"),
                 new Menu("Beer", "뉴욕 브루클린 브루어리에서 양조한 맥주")
         };
-
         Product[] products01 = {
                 new Product("ShackBurger", "토마토, 양상추, 쉑소스가 토핑된 치즈버거", 6.9),
                 new Product("SmokeShack", "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거", 8.9),
@@ -58,13 +57,19 @@ public class Kiosk {
 
             switch (number) {
                 case 1 : productMenu(products01, order); // 버거 상품으로 이동 (products01)
+                    break;
                 case 2 : productMenu(products02, order); // 아이스크림 상품으로 이동 (products02)
+                    break;
                 case 3 : productMenu(products03, order); // 음료 상품으로 이동 (products05))
+                    break;
                 case 4 : productMenu(products04, order); // 맥주 상품으로 이동 (products04)
+                    break;
                 case 5 : orderScreen(order); // 주문 화면으로 이동
+                    break;
                 case 6 : cancelScreen(order);
-                default:
-                    System.out.println("눈 똑바로 뜨고 선택하세요!!!!!!!!!!");
+                    break;
+                default: System.out.println("눈 똑바로 뜨고 선택하세요!!!!!!!!!!");
+                    break;
             }
         }
     }

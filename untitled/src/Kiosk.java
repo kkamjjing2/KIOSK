@@ -136,9 +136,16 @@ public class Kiosk {
 
     private static void completeOrder (Order order) { // 주문 완료 화면 출력
         System.out.println("주문이 완료되었습니다!");
-        System.out.println("대기 번호는 [ " + Math.random()*200+1 + " ] 번 입니다.");
-        System.out.println("(3초후 메뉴판으로 돌아갑니다.)");
+        System.out.println("대기 번호는 [ " + ((int)Math.random()*100+1) + " ] 번 입니다.");
+        System.out.println("(3초 후 메뉴판으로 돌아갑니다.)");
 
+        try{
+            Thread.sleep(3000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+
+        order.clearCart();
     }
     private static void cartList (Order order) { // 장바구니 목록 출력
         for (Product product : order.cart) {

@@ -39,5 +39,21 @@ public class Kiosk {
                 new Product("Geumgang IPA", "은은한 단맛이 좋은 여운을 남기는 정통 미국식 IPA", 5.0),
                 new Product("Hit-Lager", "라임과 소금을 사용해 시원하고 기분좋은 청량감의 멕시칸스타일 라거", 5.6),
         };
+
+        while (true) {
+            System.out.println();
+            System.out.println("[ SHAKESHACK MENU ]");
+            for (int i = 0; i < menus.length; i++) {
+                System.out.println((i + 1) + ". " + menus[i].name + "\t\t|" + menus[i].description);
+            }
+
+            System.out.println();
+            System.out.println("[ ORDER MENU ]");
+            System.out.println("5. Order\t| 장바구니를 확인 후 주문합니다.");
+            System.out.println("6. Cancel\t| 진행 중인 주문을 취소합니다.");
+
+            System.out.print("화면에 보이는 숫자를 입력해주세요. : ");
+            int number = scanner.nextInt();
+        }
     }
 }
